@@ -1,5 +1,6 @@
 # https://interactivepython.org/runestone/static/pythonds/SortSearch/TheInsertionSort.html
 
+
 def sort(L):
     n = len(L)
     for i in xrange(1, n):

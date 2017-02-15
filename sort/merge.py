@@ -1,5 +1,6 @@
 # https://interactivepython.org/runestone/static/pythonds/SortSearch/TheMergeSort.html
 
+
 def _merge(left, right):
     n = len(left)
     m = len(right)

@@ -1,5 +1,6 @@
 # https://interactivepython.org/runestone/static/pythonds/SortSearch/TheSelectionSort.html
 
+
 def sort(L):
     n = len(L)
     for slot_pos in xrange(n-1, -1, -1):
