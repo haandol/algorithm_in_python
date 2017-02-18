@@ -5,19 +5,18 @@ def dijkstra(G, start):
     VISIT = []
     PATH = {}
     DIST = {k: 99999 for k in G}
-
     DIST[start] = 0
-    Q = [start]
+    Q = G.keys()
     while Q:
-        node = Q.pop(0)
+        node = min(Q, key=lambda x: DIST[x])
+        Q.pop(Q.index(node))
         if node in VISIT:
             continue
 
         for neighbor in G[node]:
-            if DIST[node]+G[node][neighbor] < DIST[neighbor]:
+            if DIST[node] + G[node][neighbor] < DIST[neighbor]:
                 PATH[neighbor] = node
             DIST[neighbor] = min(DIST[neighbor], DIST[node]+G[node][neighbor])
-            Q.append(neighbor)
 
         VISIT.append(node)
 
