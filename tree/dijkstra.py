@@ -8,17 +8,18 @@ def dijkstra(G, start):
     DIST[start] = 0
     Q = G.keys()
     while Q:
-        node = min(Q, key=lambda x: DIST[x])
-        Q.pop(Q.index(node))
-        if node in VISIT:
+        u = min(Q, key=lambda x: DIST[x])
+        Q.pop(Q.index(u))
+        if u in VISIT:
             continue
 
-        for neighbor in G[node]:
-            if DIST[node] + G[node][neighbor] < DIST[neighbor]:
-                PATH[neighbor] = node
-            DIST[neighbor] = min(DIST[neighbor], DIST[node]+G[node][neighbor])
+        for v in G[u]:
+            alt = DIST[u] + G[u][v]
+            if alt < DIST[v]:
+                DIST[v] = alt
+                PATH[v] = u
 
-        VISIT.append(node)
+        VISIT.append(u)
 
     return PATH
 
