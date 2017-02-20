@@ -14,8 +14,8 @@ class Solution:
                 if fuel < cost[i]:
                     break
             else:
-                return True
-        return False
+                return start
+        return -1
 
 
 if '__main__' == __name__:
