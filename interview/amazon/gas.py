@@ -2,22 +2,20 @@
 
 
 class Solution:
-    def get_counter(self, start, n):
-        return range(start, n) + range(0, start)
-
     def canCompleteCircuit(self, gas, cost):
+        if sum(gas) < sum(cost):
+            return -1
+
         n = len(gas)
-        for start in xrange(n):
-            counter = self.get_counter(start, n)
-            fuel = 0
-            for i in counter:
-                fuel += gas[i]
-                fuel -= cost[i]
-                if fuel < 0:
-                    break
-            else:
-                return start
-        return -1
+        fuel = 0
+        start = 0
+        for i in xrange(n):
+            fuel += gas[i] - cost[i]
+            if fuel < 0:
+                fuel = 0
+                start = i + 1
+
+        return start
 
 
 if '__main__' == __name__:
