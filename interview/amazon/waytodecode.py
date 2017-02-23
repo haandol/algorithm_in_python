@@ -19,7 +19,7 @@ class Solution:
             if A[i] in table:
                 DP[i] += DP[i-1]
 
-            if ''.join(A[i-1:i+1]) in table:
+            if A[i-1:i+1] in table:
                 if i == 1:
                     DP[i] += 1
                 else:
@@ -29,13 +29,9 @@ class Solution:
 
 
 if '__main__' == __name__:
-    A = "12"
+    A = "1222"
     solution = Solution()
-    print solution.numDecodings(A)
-
-    A = "121"
-    solution = Solution()
-    print solution.numDecodings(A)
+    assert 5 == solution.numDecodings(A)
 
     A = "1235"
     solution = Solution()
