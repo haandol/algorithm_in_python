@@ -2,16 +2,16 @@
 
 
 def binsearch(L, target, start, end):
-    if start > end:
-        return -1
+    while start <= end:
+        mid = 1 + (start + end - 1) // 2
+        if L[mid] == target:
+            return mid
+        elif L[mid] < target:
+            start = mid+1
+        else:
+            end = mid-1
 
-    mid = (start + end) // 2
-    if L[mid] == target:
-        return mid
-    elif L[mid] < target:
-        return binsearch(L, target, mid+1, end)
-    elif target < L[mid]:
-        return binsearch(L, target, start, mid-1)
+    return -1
 
 
 def search(L, target):
