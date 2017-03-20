@@ -1,45 +1,48 @@
-# https://en.wikipedia.org/wiki/Dijkstra's_algorithm
+# http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/
 
 
-def dijkstra(G, start):
-    VISIT = []
-    PATH = {}
-    DIST = {k: 99999 for k in G}
-    DIST[start] = 0
-    Q = G.keys()
+def solution(g, start):
+    dist = [99999 for _ in range(len(g))]
+    dist[start] = 0
+
+    visited = []
+    path = {}
+
+    Q = list(g.keys())
     while Q:
-        u = min(Q, key=lambda x: DIST[x])
-        Q.pop(Q.index(u))
-        if u in VISIT:
+        u = min(Q, key=lambda x: dist[x])
+        Q.remove(u)
+        if u in visited:
             continue
 
-        for v in G[u]:
-            alt = DIST[u] + G[u][v]
-            if alt < DIST[v]:
-                DIST[v] = alt
-                PATH[v] = u
+        for v, d in g[u].items():
+            alter = dist[u] + d
+            if alter < dist[v]:
+                dist[v] = alter
+                path[v] = u
 
-        VISIT.append(u)
+        visited.append(u)
 
-    return PATH
+    return path
+
 
 
 if '__main__' == __name__:
-    G = {
-        'a': {'b': 7, 'c': 9, 'f': 14},
-        'b': {'a': 7, 'c': 10, 'd': 15},
-        'c': {'a': 9, 'b': 10, 'd': 11, 'f': 2},
-        'd': {'b': 15, 'c': 11, 'e': 6},
-        'e': {'d': 6, 'f': 9},
-        'f': {'a': 14, 'c': 2, 'e': 9},
+    g = {
+        0: {1: 4, 7: 8},
+        1: {0: 4, 2: 8, 7: 11},
+        2: {1: 8, 3: 7, 5: 4, 8: 2},
+        3: {2: 7, 4: 9, 5: 14},
+        4: {3: 9, 5: 10},
+        5: {2: 4, 3: 14, 4: 10, 6: 2},
+        6: {5: 2, 7: 1, 8: 6},
+        7: {0: 8, 1: 11, 6: 1, 8: 7},
+        8: {2: 2, 6: 6, 7: 7},
     }
+    start = 0
+    path = solution(g, start)
 
-    start, end = 'a', 'e'
-    P = dijkstra(G, start)
-
-    node = P[end]
-    VISIT = [node, end]
-    while start not in VISIT:
-        node = P[node]
-        VISIT.insert(0, node)
-    print VISIT
+    end = 8
+    while end != start:
+        print(f'{end} <- {path[end]}')
+        end = path[end]
