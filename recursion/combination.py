@@ -1,23 +1,23 @@
-def combination(result, L, n, r, start, depth):
-    if depth == r:
+def combination(result, L, n, r, start, picked):
+    if picked == r:
         print result[:r]
     else:
         for i in range(start, n):
-            result[depth] = L[i]
-            combination(result, L, n, r, i+1, depth+1)
+            result[picked] = L[i]
+            combination(result, L, n, r, i+1, picked+1)
 
 
-def combination2(result, L, n, r, index, i):
-    if index == r:
+def combination2(result, L, n, r, picked, index):
+    if picked == r:
         print result
         return
-    if i >= n:
+    if index >= n:
         return
 
-    result[index] = L[i]
-    combination2(result, L, n, r, index+1, i+1)
+    result[picked] = L[index]
+    combination2(result, L, n, r, picked+1, index+1)
 
-    combination2(result, L, n, r, index, i+1)
+    combination2(result, L, n, r, picked, index+1)
 
 
 def solution(L, r):
